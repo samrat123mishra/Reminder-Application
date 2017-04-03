@@ -1,41 +1,21 @@
 var reminderList = [];
 
-var remOperation = function () {
+var RemOperation = function () {
     this.add = function (obj) {
 
         reminderList.push(obj);
         render(reminderList);
-        var localStroageEntry = new databaseManager();
+        var localStroageEntry = new DatabaseManager();
         localStroageEntry.manipulateDataFromLocalStoarge(reminderList);
-        var alarmOperation = new alarmOpt(obj);
-        alarmOperation.set();
+        // var alarmOperation = new AlarmOpt(obj);
+        // alarmOperation.set();
     };
     reminderList=[];
     //del(obj);
 };
 
-var databaseManager = function () {
-    this.manipulateDataFromLocalStoarge = function (arr) {
-      var arr1=[];
-         arr1=JSON.parse(localStorage.getItem('reminder_List'));
-        if(arr1 !== null){
-          arr1 = arr1.concat(arr);
-          // render(arr1);
-          localStorage.setItem('reminder_List', JSON.stringify(arr1));
-          console.log('peyechi');
-      }else {
-        console.log('localStorage khali');
-        // render(arr);
-        localStorage.setItem('reminder_List', JSON.stringify(arr));
-      }
 
-    }
-};
-
-
-
-
-var deleteReminder = function(id){
+var DeleteReminder = function(id){
     this.deleteDataFromLocalStoarge = function () {
         var arr=[];
         var flag;
@@ -52,12 +32,4 @@ var deleteReminder = function(id){
     };
 };
 
-var fetch=function(){
-        var storedNames = JSON.parse(localStorage.getItem("reminder_List"));
-        if(storedNames !== null){
-            render(storedNames);
-        }else {
-          console.log('kichu neu');
-        }
 
-    }
