@@ -7,8 +7,8 @@ var RemOperation = function () {
         render(reminderList);
         var localStroageEntry = new DatabaseManager();
         localStroageEntry.manipulateDataFromLocalStoarge(reminderList);
-        // var alarmOperation = new AlarmOpt(obj);
-        // alarmOperation.set();
+        var alarmOperation = new AlarmOpt(obj);
+        alarmOperation.set();
     };
     reminderList=[];
     //del(obj);
