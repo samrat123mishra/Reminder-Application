@@ -2,20 +2,31 @@ var reminderList = [];
 
 var RemOperation = function () {
     this.add = function (obj) {
-
         reminderList.push(obj);
-        render(reminderList);
+        Render(reminderList);
         var localStroageEntry = new DatabaseManager();
         localStroageEntry.manipulateDataFromLocalStoarge(reminderList);
-        var alarmOperation = new AlarmOpt(obj);
-        alarmOperation.set();
+        var rem = [];
+       var remTime = [];
+       var arrtitle = [];
+       var arrid = [];
+       var arrdate = [];
+       rem =JSON.parse(localStorage.getItem('reminder_List'));
+       for(var j=0;j<rem.length;j++){
+           remTime.push(rem[j].time);
+           arrtitle.push(rem[j].title);
+           arrid.push(rem[j].id);
+           arrdate.push(rem[j].date);
+       }
+       var watching = new watch();
+     watching.watcher(remTime.sort(),arrtitle,arrid,arrdate);
     };
     reminderList=[];
-    //del(obj);
+    
 };
 
 
-var DeleteReminder = function(id){
+var DeleteReminder = function(id){ //this function deletes the object from local storage
     this.deleteDataFromLocalStoarge = function () {
         var arr=[];
         var flag;
@@ -26,8 +37,7 @@ var DeleteReminder = function(id){
             }
         }
         
-        console.log(arr.splice(flag, 1));
-        console.log(arr);      
+        arr.splice(flag, 1);       
          localStorage.setItem('reminder_List',JSON.stringify(arr));
     };
 };

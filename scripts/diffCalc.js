@@ -1,5 +1,5 @@
  
-var  TimeCalculation = function(remiderDate,reminderHr,reminderMin){
+var  TimeCalculation = function(remiderDate,reminderHr,reminderMin){ //responsible for time calculation
     
         var today = new Date();
         var currdd = today.getDate();

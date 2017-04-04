@@ -1,4 +1,4 @@
-var Reminder = function (title, time, date) {
+var Reminder = function (title, time, date) { //to get the formated time and date from input
     this.title = title;
     this.time = time;
     this.date = date;
