@@ -1,41 +1,32 @@
 var reminderList = [];
 
-var remOperation = function () {
+var RemOperation = function () {
     this.add = function (obj) {
-
         reminderList.push(obj);
-        render(reminderList);
-        var localStroageEntry = new databaseManager();
+        Render(reminderList);
+        var localStroageEntry = new DatabaseManager();
         localStroageEntry.manipulateDataFromLocalStoarge(reminderList);
-        var alarmOperation = new alarmOpt(obj);
-        alarmOperation.set();
+        var rem = [];
+       var remTime = [];
+       var arrtitle = [];
+       var arrid = [];
+       var arrdate = [];
+       rem =JSON.parse(localStorage.getItem('reminder_List'));
+       for(var j=0;j<rem.length;j++){
+           remTime.push(rem[j].time);
+           arrtitle.push(rem[j].title);
+           arrid.push(rem[j].id);
+           arrdate.push(rem[j].date);
+       }
+       var watching = new watch();
+     watching.watcher(remTime.sort(),arrtitle,arrid,arrdate);
     };
     reminderList=[];
-    //del(obj);
-};
-
-var databaseManager = function () {
-    this.manipulateDataFromLocalStoarge = function (arr) {
-      var arr1=[];
-         arr1=JSON.parse(localStorage.getItem('reminder_List'));
-        if(arr1 !== null){
-          arr1 = arr1.concat(arr);
-          // render(arr1);
-          localStorage.setItem('reminder_List', JSON.stringify(arr1));
-          console.log('peyechi');
-      }else {
-        console.log('localStorage khali');
-        // render(arr);
-        localStorage.setItem('reminder_List', JSON.stringify(arr));
-      }
-
-    }
+    
 };
 
 
-
-
-var deleteReminder = function(id){
+var DeleteReminder = function(id){ //this function deletes the object from local storage
     this.deleteDataFromLocalStoarge = function () {
         var arr=[];
         var flag;
@@ -46,18 +37,9 @@ var deleteReminder = function(id){
             }
         }
         
-        console.log(arr.splice(flag, 1));
-        console.log(arr);      
+        arr.splice(flag, 1);       
          localStorage.setItem('reminder_List',JSON.stringify(arr));
     };
 };
 
-var fetch=function(){
-        var storedNames = JSON.parse(localStorage.getItem("reminder_List"));
-        if(storedNames !== null){
-            render(storedNames);
-        }else {
-          console.log('kichu neu');
-        }
 
-    }
